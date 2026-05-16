@@ -1,4 +1,5 @@
 import { CONTACT_INFO } from "@/constants";
+import { onImgError } from "@/lib/utils";
 
 export function WhatsAppButton() {
   const url = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(
@@ -16,6 +17,7 @@ export function WhatsAppButton() {
       <img
         src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
         alt="WhatsApp"
+        onError={onImgError}
         className="w-6 h-6"
       />
     </a>

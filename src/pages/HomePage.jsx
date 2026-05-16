@@ -1,3 +1,4 @@
+import { useDocumentMeta } from "@/hooks/use-document-meta";
 import {
   HeroSection,
   ServicesPreview,
@@ -8,6 +9,7 @@ import {
 } from "@/features/home";
 
 export default function HomePage() {
+  useDocumentMeta();
   return (
     <div>
       <HeroSection />

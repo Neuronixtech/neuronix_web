@@ -3,8 +3,10 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { SERVICES } from "@/features/services";
+import { useDocumentMeta } from "@/hooks/use-document-meta";
 
 export default function ServicesPage() {
+  useDocumentMeta("Services");
   return (
     <div className="pt-20">
       {/* Hero */}

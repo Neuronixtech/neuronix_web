@@ -4,9 +4,11 @@ import { ArrowLeft, Clock, User } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { BlogCard } from "@/features/blog";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/features/blog";
-import { SectionReveal } from "@/components/ui/SectionReveal";
+import { useDocumentMeta } from "@/hooks/use-document-meta";
+import { onImgError } from "@/lib/utils";
 
 export default function BlogPage() {
+  useDocumentMeta("Blog");
   const [selectedPost, setSelectedPost]   = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -119,6 +121,7 @@ export default function BlogPage() {
                 <img
                   src={selectedPost.image}
                   alt={selectedPost.title}
+                  onError={onImgError}
                   className="w-full h-64 sm:h-80 object-cover"
                 />
               </div>

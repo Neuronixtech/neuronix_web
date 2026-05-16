@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
-import { SectionReveal } from "@/components/ui/SectionReveal";
 import { PortfolioCard } from "@/features/portfolio";
 import { PROJECTS, PORTFOLIO_CATEGORIES } from "@/features/portfolio";
+import { onImgError } from "@/lib/utils";
+import { useDocumentMeta } from "@/hooks/use-document-meta";
 
 export default function PortfolioPage() {
+  useDocumentMeta("Portfolio");
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -115,6 +117,7 @@ export default function PortfolioPage() {
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
+                  onError={onImgError}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />

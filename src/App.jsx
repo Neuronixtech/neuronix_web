@@ -4,17 +4,20 @@ import { queryClientInstance } from "@/lib/query-client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "@/stores/authStore";
 import { AppRoutes } from "@/routes";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 function App() {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <AppRoutes />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <QueryClientProvider client={queryClientInstance}>
+          <Router>
+            <AppRoutes />
+          </Router>
+          <Toaster />
+        </QueryClientProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

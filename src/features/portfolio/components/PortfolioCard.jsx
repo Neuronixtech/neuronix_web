@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink, ArrowRight } from "lucide-react";
+import { onImgError } from "@/lib/utils";
 
 export function PortfolioCard({ title, category, image, description, tech, liveDemo, index = 0, onClick }) {
   return (
@@ -18,6 +19,7 @@ export function PortfolioCard({ title, category, image, description, tech, liveD
         <img
           src={image}
           alt={title}
+          onError={onImgError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
         {/* Gradient overlay */}

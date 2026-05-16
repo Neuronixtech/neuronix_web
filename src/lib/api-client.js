@@ -34,19 +34,20 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+const jsonHeaders = () => ({ "Content-Type": "application/json", ...authHeaders() });
+
 export const api = {
   async get(endpoint) {
-    const res = await fetch(`${BASE_URL}${endpoint}`, {
-      headers: { "Content-Type": "application/json", ...authHeaders() },
-    });
+    const res = await fetch(`${BASE_URL}${endpoint}`, { headers: jsonHeaders() });
     return handleResponse(res);
   },
 
   async post(endpoint, data) {
+    const isFormData = data instanceof FormData;
     const res = await fetch(`${BASE_URL}${endpoint}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
-      body: JSON.stringify(data),
+      headers: isFormData ? authHeaders() : jsonHeaders(),
+      body: isFormData ? data : JSON.stringify(data),
     });
     return handleResponse(res);
   },
@@ -54,17 +55,14 @@ export const api = {
   async put(endpoint, data) {
     const res = await fetch(`${BASE_URL}${endpoint}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
+      headers: jsonHeaders(),
       body: JSON.stringify(data),
     });
     return handleResponse(res);
   },
 
   async delete(endpoint) {
-    const res = await fetch(`${BASE_URL}${endpoint}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
-    });
+    const res = await fetch(`${BASE_URL}${endpoint}`, { headers: jsonHeaders() });
     return handleResponse(res);
   },
 };

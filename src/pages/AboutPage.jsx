@@ -4,15 +4,10 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { TeamCard } from "@/features/about";
 import { TEAM, VALUES, STATS } from "@/features/about";
-
-const MISSION_POINTS = [
-  "Deliver innovative solutions",
-  "Build scalable products",
-  "Empower businesses digitally",
-  "Maintain quality and transparency",
-];
+import { useDocumentMeta } from "@/hooks/use-document-meta";
 
 export default function AboutPage() {
+  useDocumentMeta("About Us");
   return (
     <div className="pt-20">
 

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { onImgError } from "@/lib/utils";
 
 export function BlogCard({ title, excerpt, category, image, author, readTime, index = 0, onClick }) {
   return (
@@ -17,6 +18,7 @@ export function BlogCard({ title, excerpt, category, image, author, readTime, in
         <img
           src={image}
           alt={title}
+          onError={onImgError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
         <div className="absolute top-3 left-3">

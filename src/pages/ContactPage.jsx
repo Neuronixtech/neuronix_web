@@ -9,7 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { CONTACT_INFO } from "@/constants";
+import { api } from "@/lib/api-client";
 import { toast } from "sonner";
+import { useDocumentMeta } from "@/hooks/use-document-meta";
 
 /* ─── Static data ─────────────────────────────────────────── */
 
@@ -104,6 +106,7 @@ function SelectField({ label, value, onChange, options, placeholder }) {
 /* ─── Page ────────────────────────────────────────────────── */
 
 export default function ContactPage() {
+  useDocumentMeta("Contact Us");
   const [form, setForm]                   = useState(INITIAL_FORM);
   const [loading, setLoading]             = useState(false);
   const [submitted, setSubmitted]         = useState(false);
@@ -116,19 +119,22 @@ export default function ContactPage() {
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value ?? e }));
 
   /* Contact form submit */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.fullName || !form.email || !form.message) {
       toast.error("Please fill in Name, Email, and Message");
       return;
     }
     setLoading(true);
-    // TODO: replace with api.post('/contact', form) when backend is ready
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await api.post("/contact", form);
       setSubmitted(true);
       toast.success("Message sent! We'll get back to you soon.");
-    }, 1000);
+    } catch (err) {
+      toast.error("Could not send message. Please email us directly at " + CONTACT_INFO.email);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => { setSubmitted(false); setForm(INITIAL_FORM); };
@@ -157,16 +163,21 @@ export default function ContactPage() {
   };
 
   /* Proposal submit */
-  const handleProposalSubmit = (e) => {
+  const handleProposalSubmit = async (e) => {
     e.preventDefault();
     if (!files.length) { toast.error("Please attach at least one file"); return; }
     setProposalLoading(true);
-    // TODO: replace with FormData upload when backend is ready
-    setTimeout(() => {
-      setProposalLoading(false);
+    try {
+      const formData = new FormData();
+      files.forEach((f) => formData.append("files", f));
+      await api.post("/proposals", formData);
       setProposalSent(true);
       toast.success("Proposal received! We'll review and respond within 48 hours.");
-    }, 1200);
+    } catch (err) {
+      toast.error("Could not upload proposal. Please email us directly at " + CONTACT_INFO.email);
+    } finally {
+      setProposalLoading(false);
+    }
   };
 
   /* ── Render ─────────────────────────────────────────────── */
