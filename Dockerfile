@@ -7,14 +7,17 @@ WORKDIR /app
 # Copy package files
 COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm ci --prefer-offline --no-audit
+# Install all dependencies (including devDependencies needed for build)
+RUN npm ci --no-audit --legacy-peer-deps
 
 # Copy source code
 COPY . .
 
 # Build the application
 RUN npm run build
+
+# Clean up dev dependencies (optional - reduces build size)
+RUN npm prune --production
 
 # Stage 2: Runtime stage
 FROM nginx:alpine
