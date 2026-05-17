@@ -1,17 +1,17 @@
 # Multi-stage build for Neuronix React SPA
 # Stage 1: Build stage
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /app
 
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # Copy package files
-COPY package.json package-lock.json* ./
+COPY package.json package-lock.json ./
 
-# Install dependencies with retry logic
-RUN npm install --legacy-peer-deps --verbose 2>&1 || npm install --legacy-peer-deps
-
-# Verify critical build tools are installed
-RUN npm list vite react react-dom
+# Install dependencies - clear npm cache if needed
+RUN npm install --legacy-peer-deps
 
 # Copy source code  
 COPY . .
