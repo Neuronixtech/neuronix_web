@@ -5,19 +5,19 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json* ./
 
-# Install all dependencies (including devDependencies needed for build)
-RUN npm ci --no-audit --legacy-peer-deps
+# Install dependencies with retry logic
+RUN npm install --legacy-peer-deps --verbose 2>&1 || npm install --legacy-peer-deps
 
-# Copy source code
+# Verify critical build tools are installed
+RUN npm list vite react react-dom
+
+# Copy source code  
 COPY . .
 
 # Build the application
 RUN npm run build
-
-# Clean up dev dependencies (optional - reduces build size)
-RUN npm prune --production
 
 # Stage 2: Runtime stage
 FROM nginx:alpine
