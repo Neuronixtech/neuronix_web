@@ -26,6 +26,9 @@ RUN npm run build
 # Stage 2: Runtime stage
 FROM nginx:alpine
 
+# Install wget for healthcheck
+RUN apk add --no-cache wget
+
 # Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
