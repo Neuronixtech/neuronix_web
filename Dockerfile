@@ -7,10 +7,11 @@ WORKDIR /app
 # Install curl for health checks
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Copy package files
-COPY package.json package-lock.json ./
+# Copy only package files first
+COPY package.json ./
 
-# Install dependencies - clear npm cache if needed
+# Install dependencies - regenerate lock file to ensure all deps are included
+# Use npm install --save-dev vite to force include devDependencies
 RUN npm install --legacy-peer-deps
 
 # Copy source code  
