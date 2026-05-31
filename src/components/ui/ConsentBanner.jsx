@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "cookie-consent";
 
-export function CookieConsent() {
+export function ConsentBanner() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {

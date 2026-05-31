@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Chatbot } from "@/features/chatbot";
-import { CookieConsent } from "@/components/ui/CookieConsent";
+import { ConsentBanner } from "@/components/ui/ConsentBanner";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { NeuralNetwork3D } from "@/components/ui/NeuralNetwork3D";
 
@@ -32,7 +32,7 @@ export default function Layout() {
         <Footer />
         <Chatbot />
         <WhatsAppButton />
-        <CookieConsent />
+        <ConsentBanner />
       </div>
     </div>
   );
