@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 15.5 0% 4%;
+    --foreground: 15.5 0% 100%;
+    --card: 15.5 0% 7%;
+    --card-foreground: 15.5 0% 100%;
+    --popover: 15.5 0% 7%;
+    --popover-foreground: 15.5 0% 100%;
+    --primary: 15.5 100% 61%;
+    --primary-foreground: 15.5 0% 100%;
+    --secondary: 15.5 0% 12%;
+    --secondary-foreground: 15.5 0% 100%;
+    --muted: 15.5 0% 12%;
+    --muted-foreground: 15.5 0% 70%;
+    --accent: 15.5 100% 61%;
+    --accent-foreground: 15.5 0% 100%;
+    --destructive: 15 84.2% 60.2%;
+    --destructive-foreground: 15.5 0% 98%;
+    --border: 15.5 0% 15%;
+    --input: 15.5 0% 15%;
+    --ring: 15.5 100% 61%;
+    --chart-1: 15.5 100% 61%;
+    --chart-2: 15.5 80% 50%;
+    --chart-3: 15.5 60% 40%;
+    --chart-4: 15.5 40% 30%;
+    --chart-5: 15.5 20% 20%;
+    --radius: 0.75rem;
+    --sidebar-background: 15.5 0% 5%;
+    --sidebar-foreground: 15.5 0% 90%;
+    --sidebar-primary: 15.5 100% 61%;
+    --sidebar-primary-foreground: 15.5 0% 100%;
+    --sidebar-accent: 15.5 0% 12%;
+    --sidebar-accent-foreground: 15.5 0% 100%;
+    --sidebar-border: 15.5 0% 15%;
+    --sidebar-ring: 15.5 100% 61%;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  .dark {
+    --background: 15.5 0% 4%;
+    --foreground: 15.5 0% 100%;
+    --card: 15.5 0% 7%;
+    --card-foreground: 15.5 0% 100%;
+    --popover: 15.5 0% 7%;
+    --popover-foreground: 15.5 0% 100%;
+    --primary: 15.5 100% 61%;
+    --primary-foreground: 15.5 0% 100%;
+    --secondary: 15.5 0% 12%;
+    --secondary-foreground: 15.5 0% 100%;
+    --muted: 15.5 0% 12%;
+    --muted-foreground: 15.5 0% 70%;
+    --accent: 15.5 100% 61%;
+    --accent-foreground: 15.5 0% 100%;
+    --destructive: 15 62.8% 30.6%;
+    --destructive-foreground: 15.5 0% 98%;
+    --border: 15.5 0% 15%;
+    --input: 15.5 0% 15%;
+    --ring: 15.5 100% 61%;
+    --chart-1: 15.5 100% 61%;
+    --chart-2: 15.5 80% 50%;
+    --chart-3: 15.5 60% 40%;
+    --chart-4: 15.5 40% 30%;
+    --chart-5: 15.5 20% 20%;
+    --sidebar-background: 15.5 0% 5%;
+    --sidebar-foreground: 15.5 0% 90%;
+    --sidebar-primary: 15.5 100% 61%;
+    --sidebar-primary-foreground: 15.5 0% 100%;
+    --sidebar-accent: 15.5 0% 12%;
+    --sidebar-accent-foreground: 15.5 0% 100%;
+    --sidebar-border: 15.5 0% 15%;
+    --sidebar-ring: 15.5 100% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0B;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff5c3340;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff5c3380;
+}
+
+/* Glow effects */
+.glow-orange {
+  box-shadow: 0 0 20px rgba(255, 92, 51, 0.3), 0 0 60px rgba(255, 92, 51, 0.1);
+}
+.glow-orange-sm {
+  box-shadow: 0 0 10px rgba(255, 92, 51, 0.2), 0 0 30px rgba(255, 92, 51, 0.05);
+}
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 92, 51, 0.5), 0 0 40px rgba(255, 92, 51, 0.2);
+}
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.gradient-orange {
+  background: linear-gradient(135deg, #1a0500 0%, #ff5c33 100%);
+}
+.gradient-orange-subtle {
+  background: linear-gradient(135deg, rgba(255,92,51,0.1) 0%, rgba(255,92,51,0.02) 100%);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff5c33, #ff8c4e);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* Ripple button effect */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-ripple:hover::after {
+  opacity: 1;
+}
+
+/* Smooth reveal */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typing cursor */
+.typing-cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  color: hsl(15.5 100% 61%);
+  font-weight: 100;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Moving background lines */
+@keyframes moveLine1 {
+  0% { transform: translateX(-100%) translateY(0); }
+  100% { transform: translateX(100vw) translateY(-30px); }
+}
+@keyframes moveLine2 {
+  0% { transform: translateX(100vw) translateY(0); }
+  100% { transform: translateX(-100%) translateY(30px); }
+}
+@keyframes moveLine3 {
+  0% { transform: translateY(100%) translateX(0); }
+  100% { transform: translateY(-100vh) translateX(40px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.hero-line-1 {
+  animation: moveLine1 12s linear infinite;
+}
+.hero-line-2 {
+  animation: moveLine2 15s linear infinite;
+}
+.hero-line-3 {
+  animation: moveLine3 18s linear infinite;
+}
+
+/* Gradient text */
+.text-gradient-orange {
+  background: linear-gradient(135deg, hsl(15.5 100% 61%), hsl(30 100% 65%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Counter animation */
+.counter-value {
+  display: inline-block;
+}
+
+/* Floating particles */
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+  25% { transform: translateY(-20px) translateX(10px) scale(1.2); opacity: 0.6; }
+  50% { transform: translateY(-10px) translateX(-5px) scale(0.9); opacity: 0.4; }
+  75% { transform: translateY(-30px) translateX(15px) scale(1.1); opacity: 0.5; }
+}
+
+/* Improved typing cursor */
+.typing-cursor::after {
+  content: "|";
+  animation: blink 0.8s step-end infinite;
+  color: hsl(15.5 100% 61%);
+  font-weight: 200;
+  margin-left: 1px;
+}
+
+/* Glass button base */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
