@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  neuronix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: neuronix_app
+    ports:
+      - "3000:80"
+    environment:
+      # Pass environment variables at runtime if needed
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-/api}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - neuronix_network
+
+networks:
+  neuronix_network:
+    driver: bridge

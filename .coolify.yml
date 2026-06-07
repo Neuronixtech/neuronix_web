@@ -1,0 +1,25 @@
+# Coolify Configuration for Neuronix Project
+# This file helps Coolify automatically configure deployment
+
+version: '3.8'
+
+services:
+  app:
+    # Coolify will detect the Dockerfile automatically
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-/api}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    labels:
+      - "coolify.managed=true"
